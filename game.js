@@ -642,8 +642,8 @@ function drawTitle() {
   const pop = Math.abs(Math.sin(state.frame / 14)) * 4;
   text("+1", 328, 62 - pop, 12, "#7dff7d", "left");
   drawCake(W / 2, 98);
-  text("+1 YEAR ADDED. NO REFUNDS.", W / 2, 170, 7, "#fff", "center");
-  text("OCT 29 | SKILL ISSUE NOT INCLUDED", W / 2, 184, 6, "#c9b8ff", "center");
+  text("HAPPY 20TH BIRTHDAY!", W / 2, 170, 7, "#fff", "center");
+  text("SANA WALANG SKILL ISSUES XD", W / 2, 184, 6, "#c9b8ff", "center");
   if (state.frame % 50 < 32) text("PRESS START", W / 2, 210, 9, "#ffe066", "center");
 }
 
