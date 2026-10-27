@@ -1,4 +1,4 @@
-const SHEET_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwImWkDcTPmR_TqaVgNfaFD8zmVdk72kiSExGqMCp2wKHn3OdJjIqMW9y2JxJe9nddF/exec";
 const HIS_NAME = "SHAWN";
 
 const LETTER = {
