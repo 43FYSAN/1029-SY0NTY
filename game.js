@@ -1,5 +1,5 @@
 // ================= CONFIG (edit these) =================
-const SHEET_URL = "https://script.google.com/macros/s/AKfycbwImWkDcTPmR_TqaVgNfaFD8zmVdk72kiSExGqMCp2wKHn3OdJjIqMW9y2JxJe9nddF/exec";
+const SHEET_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 const HIS_NAME = "SHAWN";
 
 // The letter he picks up in the last level. Edit the text, and put your photos in the /photos folder.
@@ -8,7 +8,7 @@ const LETTER = {
   lines: [
     "Happy birthday, Shawn!",
     "If you're reading this, you got past every fake flag, every fake floor, and every fake checkpoint I put in your way. That's real dedication.",
-    "Thank you for being my favorite person and my favorite player 1. I'm so glad I get to play this level called life with you.",
+    "Thank you for being my favorite person and my favorite player 2. I'm so glad I get to play this level called life with you.",
     "Here are some of our best save points:",
   ],
   photos: ["photos/1.jpg", "photos/2.jpg", "photos/3.jpg"],
@@ -81,14 +81,14 @@ const LEVELS = [
       GR(560, 190, 270), CP(580, 190), POP(650, 190, 20, 625), FLAG(780, 190),
     ] },
 
-  { name: "TRUST ISSUES", w: 1120, bg: ["#0f3b4a", "#2a8aa0"], pal: ["#6fd0c8", "#2f5a66"], spawn: [20, 170],
+  { name: "TRUST ISSUES", w: 1150, bg: ["#0f3b4a", "#2a8aa0"], pal: ["#6fd0c8", "#2f5a66"], spawn: [20, 170],
     build: () => [
       GR(0, 190, 100), S(130, 190, 40), G(200, 190, 40), S(195, 162, 30), S(250, 155, 30),
       GR(310, 190, 70), CP(330, 190),
       REV(390, 230), S(410, 185, 40), S(480, 185, 40), S(550, 185, 40),
       GR(620, 190, 80), FAKEDOC(660, 178),
       GR(730, 190, 140), POP(780, 190, 24, 750), FCP(830, 190),
-      C(900, 185, 30), FF(912, 185), C(960, 185, 30), GR(1010, 190, 110), FLAG(1070, 190),
+      C(900, 185, 50), FF(925, 185), C(980, 185, 30), GR(1040, 190, 110), FLAG(1100, 190),
     ] },
 
   { name: "FOOD COURT SPEEDRUN", w: 1280, bg: ["#3b0f1f", "#a2324c"], pal: ["#ffd23f", "#7a3a2a"], spawn: [20, 170],
@@ -376,7 +376,7 @@ function stepLevel() {
   }
   if (landed) {
     P.on = landed;
-    if (landed.k === "c" && landed.t < 0) landed.t = 22;
+    if (landed.k === "c" && landed.t < 0) landed.t = 30;
     if (landed.k === "h") landed.seen = true;
   }
 
