@@ -4,15 +4,15 @@ const HIS_NAME = "SHAWN";
 const LETTER = {
   title: "A LETTER FOR SHAWN",
   lines: [
-    "Happy birthday, Shawn!",
-    "Today is all about you, and I’m so happy I get to celebrate it with you.",
-    "I still remember our first date. You smelled so good, and it was obvious you were trying to impress me HAHA. What you didn’t know is that it worked. I never imagined that scent would become one of my favorite memories.",
-    "Since then, you’ve made even the most ordinary days feel special. I love how you make me laugh and put me at ease, even when I’m exhausted. You make me want to be a better person, and I’m grateful for every moment we share.",
-    "My wish for you this birthday is good health, big wins, all the things you dream of, and plenty of good food. I hope this year brings you as much joy and love as you bring to me. I can’t wait to see what adventures we’ll have together.",
-    "You don’t have to try to impress me anymore. I’ve already fallen for you.",
+    "happy birthday, Shawn!",
+    "today is all about you, and i’m so happy i get to celebrate it with you.",
+    "i still remember our first date, super bango mo and sobrang obvious that were trying to impress me HAHAHAHAHAHA, and what you didn’t know is that it worked. i never imagined that scent would become one of my favorite memories, kasi until now nire-recall ko pa rin siya.",
+    "since then, you’ve made even the most ordinary days feel special. i love how you make me laugh and put me at ease, even when i’m exhausted. you make me want to be a better person, and i’m grateful for every moment we share.",
+    "my wish for you this birthday is good health, big wins, all the things you dream of, and plenty of good food. i hope this year brings you as much joy and love as you bring to me. i can’t wait to see what adventures we’ll have together.",
 ],
-  photos: ["photos1.png", "photos/2.jpg", "photos/3.jpg"],
-  sign: "- Aefy baby",
+  photos: ["photos1.jpeg", "photos2.jpg", "photos3.jpg"],
+  ps: "ps. i hope you like the game i made for you. i know it’s not perfect, but i made it with love and a lot of sweat (and tears).",
+  sign: "- aefy baby",
 };
 
 const END_MESSAGE = [
@@ -30,19 +30,19 @@ const FONT = "'Press Start 2P', monospace";
 
 const SPEED = 1.8, ACCEL = 0.35, JUMP = -5.6, GRAV = 0.3;
 
-const S = (x, y, w, h) => ({ k: "s", x, y, w, h: h || 8 });                 // solid platform
-const GR = (x, y, w) => ({ k: "s", x, y, w, h: 40, ground: true });         // ground block
-const C = (x, y, w) => ({ k: "c", x, y, w, h: 8, t: -1, gone: false });     // crumbles after you step on it
-const G = (x, y, w) => ({ k: "g", x, y, w, h: 8, hit: 0 });                 // ghost platform (fake!)
-const HID = (x, y, w) => ({ k: "h", x, y, w, h: 8, seen: false });          // invisible until touched
+const S = (x, y, w, h) => ({ k: "s", x, y, w, h: h || 8 });
+const GR = (x, y, w) => ({ k: "s", x, y, w, h: 40, ground: true });
+const C = (x, y, w) => ({ k: "c", x, y, w, h: 8, t: -1, gone: false });
+const G = (x, y, w) => ({ k: "g", x, y, w, h: 8, hit: 0 });
+const HID = (x, y, w) => ({ k: "h", x, y, w, h: 8, seen: false });
 const M = (x0, y0, dx, dy, sp, w) => ({ k: "m", x0, y0, dx, dy, sp, w: w || 40, h: 8, x: x0, y: y0, mdx: 0, mdy: 0 });
 const SP = (x, y, w) => ({ k: "sp", x, y, w });                             // spikes
-const POP = (x, y, w, from) => ({ k: "pop", x, y, w, from, up: 0, on: false }); // spikes that pop out
+const POP = (x, y, w, from) => ({ k: "pop", x, y, w, from, up: 0, on: false });
 const FLAG = (x, y) => ({ k: "flag", x, y });
-const FF = (x, y, win) => ({ k: "ff", x, y, win: !!win });                  // fake flag
+const FF = (x, y, win) => ({ k: "ff", x, y, win: !!win });
 const CP = (x, y) => ({ k: "cp", x, y });
-const FCP = (x, y) => ({ k: "fcp", x, y });                                 // fake checkpoint
-const REV = (x, w) => ({ k: "rev", x, w });                                 // reversed controls zone
+const FCP = (x, y) => ({ k: "fcp", x, y });
+const REV = (x, w) => ({ k: "rev", x, w });
 const opt = (id, label, icon) => ({ id, label, icon });
 const pick = (x, y, key, o) => ({ k: "pick", x, y, key, id: o.id, label: o.label, icon: o.icon });
 const bad = (x, y, label, icon, msg) => ({ k: "bad", x, y, label, icon, msg });
@@ -70,7 +70,7 @@ const LEVELS = [
   { name: "BREAKFAST OF CHAMPIONS", w: 830, bg: ["#5e2a1b", "#c9733a"], pal: ["#7fd35a", "#7a4a2a"], spawn: [20, 170],
     build: () => [
       GR(0, 190, 110), S(140, 185, 50), S(220, 170, 50),
-      ...fork(270, "cake", opt("Red Ribbon Black Forest", "BLACK FOREST", "emoji:🍫"), opt("Red Ribbon Tiramisu", "TIRAMISU", "emoji:🍰"),
+      ...fork(270, "cake", opt("Red Ribbon Black Forest", "BLACK FOREST", "emoji:🍮"), opt("Red Ribbon Tiramisu", "TIRAMISU", "emoji:🍰"),
               ["BROCCOLI", "emoji:🥦", "BROCCOLI?? WHO PUT THAT HERE"]),
       GR(560, 190, 270), CP(580, 190), POP(650, 190, 20, 625), FLAG(780, 190),
     ] },
@@ -92,7 +92,7 @@ const LEVELS = [
               ["CABBAGE", "emoji:🥬", "CABBAGE. REALLY?"]),
       GR(540, 190, 160), CP(560, 190), POP(600, 190, 20, 575),
       S(730, 170, 40),
-      ...fork(770, "drink", opt("Coke", "COKE", "emoji:🥤"), opt("Royal", "ROYAL", "emoji:🍊"),
+      ...fork(770, "drink", opt("Coke", "COKE", "emoji:🥤"), opt("Royal", "ROYAL", "emoji:🍹"),
               ["EXPIRED MILK", "emoji:🥛", "THAT MILK IS EXPIRED"]),
       GR(1060, 190, 220), POP(1120, 190, 20, 1095), FLAG(1230, 190),
     ] },
@@ -131,7 +131,7 @@ const LEVELS = [
 ];
 
 const TAUNTS = [
-  "SKILL ISSUE", "SO CLOSE. NOT.", "IT'S EASY, REMEMBER?", "NICE JUMP... INTO THE VOID", "LMAO",
+  "SKILL ISSUE", "BOO", "IT'S EASY, REMEMBER?", "NICE JUMP... INTO THE VOID", "LMAO",
   "TOUCH GRASS (NOT THIS GRASS)", "THE FLOOR SAYS HI", "ARE YOU EVEN TRYING", "HAVE YOU TRIED JUMPING?",
   "THAT WAS A CHECKPOINT. WAS.", "LAG. (IT WASN'T LAG)", "BIRTHDAY BOY MOMENT", "OLD AGE IS HITTING EARLY",
   "AGE +1, REFLEXES -1", "PLEASE DON'T BREAK YOUR DEVICE",
