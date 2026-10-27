@@ -1,28 +1,26 @@
-// ================= CONFIG (edit these) =================
 const SHEET_URL = "PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
 const HIS_NAME = "SHAWN";
 
-// The letter he picks up in the last level. Edit the text, and put your photos in the /photos folder.
 const LETTER = {
   title: "A LETTER FOR SHAWN",
   lines: [
     "Happy birthday, Shawn!",
-    "If you're reading this, you got past every fake flag, every fake floor, and every fake checkpoint I put in your way. That's real dedication.",
-    "Thank you for being my favorite person and my favorite player 2. I'm so glad I get to play this level called life with you.",
-    "Here are some of our best save points:",
-  ],
-  photos: ["photos/1.jpg", "photos/2.jpg", "photos/3.jpg"],
-  sign: "- YOUR PLAYER 2",
+    "Today is all about you, and I’m so happy I get to celebrate it with you.",
+    "I still remember our first date. You smelled so good, and it was obvious you were trying to impress me HAHA. What you didn’t know is that it worked. I never imagined that scent would become one of my favorite memories.",
+    "Since then, you’ve made even the most ordinary days feel special. I love how you make me laugh and put me at ease, even when I’m exhausted. You make me want to be a better person, and I’m grateful for every moment we share.",
+    "My wish for you this birthday is good health, big wins, all the things you dream of, and plenty of good food. I hope this year brings you as much joy and love as you bring to me. I can’t wait to see what adventures we’ll have together.",
+    "You don’t have to try to impress me anymore. I’ve already fallen for you.",
+],
+  photos: ["photos1.png", "photos/2.jpg", "photos/3.jpg"],
+  sign: "- Aefy baby",
 };
 
-// The message on the ending screen
 const END_MESSAGE = [
   "HAPPY BIRTHDAY, SHAWN!",
-  "YOU CLEARED EVERY LEVEL.",
+  "NOW THAT YOU CLEARED EVERY LEVEL,",
   "THE REAL PRIZE IS ON ITS WAY.",
-  "I LOVE YOU!",
+  "I LOVE YOU, BABY!",
 ];
-// =======================================================
 
 const W = 400, H = 225;
 const cv = document.getElementById("c");
@@ -30,10 +28,8 @@ const ctx = cv.getContext("2d");
 ctx.imageSmoothingEnabled = false;
 const FONT = "'Press Start 2P', monospace";
 
-// physics
 const SPEED = 1.8, ACCEL = 0.35, JUMP = -5.6, GRAV = 0.3;
 
-// ---------- level building blocks ----------
 const S = (x, y, w, h) => ({ k: "s", x, y, w, h: h || 8 });                 // solid platform
 const GR = (x, y, w) => ({ k: "s", x, y, w, h: 40, ground: true });         // ground block
 const C = (x, y, w) => ({ k: "c", x, y, w, h: 8, t: -1, gone: false });     // crumbles after you step on it
@@ -53,7 +49,6 @@ const bad = (x, y, label, icon, msg) => ({ k: "bad", x, y, label, icon, msg });
 const MAIL = (x, y) => ({ k: "letter", x, y, real: true });
 const FAKEDOC = (x, y) => ({ k: "letter", x, y, real: false });
 
-// A fork: two routes (high / low). Each route has one item. b = x where the previous platform ends (top y=170).
 function fork(b, key, hi, lo, decoy) {
   return [
     S(b + 30, 140, 50), S(b + 110, 125, 50), S(b + 190, 140, 50), S(b + 265, 165, 30),
@@ -64,7 +59,6 @@ function fork(b, key, hi, lo, decoy) {
   ];
 }
 
-// ---------- levels ----------
 const LEVELS = [
   { name: "TUTORIAL (IT'S EASY, TRUST ME)", w: 900, bg: ["#2a1b5e", "#5b3a9e"], pal: ["#4ec04e", "#6b4a2b"], spawn: [20, 170],
     build: () => [
@@ -140,10 +134,9 @@ const TAUNTS = [
   "SKILL ISSUE", "SO CLOSE. NOT.", "IT'S EASY, REMEMBER?", "NICE JUMP... INTO THE VOID", "LMAO",
   "TOUCH GRASS (NOT THIS GRASS)", "THE FLOOR SAYS HI", "ARE YOU EVEN TRYING", "HAVE YOU TRIED JUMPING?",
   "THAT WAS A CHECKPOINT. WAS.", "LAG. (IT WASN'T LAG)", "BIRTHDAY BOY MOMENT", "OLD AGE IS HITTING EARLY",
-  "AGE +1, REFLEXES -1", "PLEASE DON'T BREAK YOUR PHONE",
+  "AGE +1, REFLEXES -1", "PLEASE DON'T BREAK YOUR DEVICE",
 ];
 
-// ---------- state ----------
 const state = {
   screen: "title", level: 0, frame: 0, flash: 0, shake: 0, paused: false,
   answers: {}, deaths: 0, lvlDeaths: 0, session: Math.random().toString(36).slice(2, 10),
@@ -156,7 +149,6 @@ const keys = { left: false, right: false, jump: false };
 let jumpHeld = false, cam = 0;
 let particles = [];
 
-// ---------- sound ----------
 let ac = null;
 function beep(f, d, type, vol, slide) {
   try {
@@ -170,7 +162,6 @@ function beep(f, d, type, vol, slide) {
   } catch (e) {}
 }
 
-// ---------- saving ----------
 function saveAnswer(key, value) {
   const payload = { session: state.session, key, value, time: new Date().toISOString() };
   try {
@@ -198,7 +189,6 @@ async function flushQueue() {
 window.addEventListener("online", flushQueue);
 flushQueue();
 
-// ---------- letter overlay ----------
 const ov = document.getElementById("ov");
 function showOverlay(data) {
   state.paused = true; keys.left = keys.right = keys.jump = false;
@@ -217,7 +207,6 @@ function showOverlay(data) {
 function closeOverlay() { ov.hidden = true; state.paused = false; jumpHeld = true; }
 document.getElementById("ovClose").addEventListener("click", closeOverlay);
 
-// ---------- input ----------
 const map = { ArrowLeft: "left", KeyA: "left", ArrowRight: "right", KeyD: "right",
   ArrowUp: "jump", KeyW: "jump", Space: "jump" };
 addEventListener("keydown", e => {
@@ -244,7 +233,6 @@ function startIfNeeded() {
   else if (state.screen === "end" && state.endReady) { location.reload(); }
 }
 
-// ---------- level handling ----------
 function buildEnts() {
   const L = LEVELS[state.level];
   return L.build().filter(e => {
@@ -279,7 +267,6 @@ function burst(x, y, n, cols) {
   }
 }
 
-// ---------- update ----------
 const ovl = (a, b) => a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
 
 function update() {
@@ -324,20 +311,17 @@ function stepLevel() {
     }
   }
 
-  // reversed controls zone
   state.rev = false;
   const cx = P.x + P.w / 2;
   for (const e of state.ents) if (e.k === "rev" && cx > e.x && cx < e.x + e.w) state.rev = true;
   let left = keys.left, right = keys.right;
   if (state.rev) { const t = left; left = right; right = t; }
 
-  // horizontal control
   if (left) { P.vx -= ACCEL; P.face = -1; }
   if (right) { P.vx += ACCEL; P.face = 1; }
   if (!left && !right) P.vx *= 0.7;
   P.vx = Math.max(-SPEED, Math.min(SPEED, P.vx));
 
-  // jump
   if (P.ground) P.coyote = 6; else if (P.coyote > 0) P.coyote--;
   if (keys.jump && !jumpHeld && P.coyote > 0) { P.vy = JUMP; P.ground = false; P.coyote = 0; beep(520, 0.1, "square", 0.03, 220); }
   jumpHeld = keys.jump;
@@ -346,10 +330,8 @@ function stepLevel() {
 
   const solids = state.ents.filter(e => e.k === "s" || e.k === "h" || e.k === "m" || (e.k === "c" && !e.gone));
 
-  // ride moving platforms
   if (P.on && P.on.k === "m") { P.x += P.on.mdx; P.y += P.on.mdy; }
 
-  // horizontal move + walls
   P.x += P.vx;
   for (const p of solids) {
     if (P.x < p.x + p.w && P.x + P.w > p.x && P.y < p.y + p.h && P.y + P.h > p.y + 2) {
@@ -360,7 +342,6 @@ function stepLevel() {
   }
   P.x = Math.max(0, Math.min(L.w - P.w, P.x));
 
-  // vertical move + landing
   const prevBottom = P.y + P.h, prevTop = P.y;
   P.y += P.vy;
   P.ground = false; P.on = null;
@@ -380,7 +361,6 @@ function stepLevel() {
     if (landed.k === "h") landed.seen = true;
   }
 
-  // crumble timers, ghost flicker, pop spikes
   for (const e of state.ents) {
     if (e.k === "c" && e.t > 0 && --e.t === 0) { e.gone = true; burst(e.x + e.w / 2, e.y + 4, 8, ["#8a6b4a", "#5a3a22"]); beep(120, .15, "sawtooth", .04, -60); }
     if (e.k === "g") {
@@ -393,7 +373,6 @@ function stepLevel() {
     }
   }
 
-  // hazards & things
   const pr = { x: P.x + 2, y: P.y + 3, w: P.w - 4, h: P.h - 3 };
   for (const e of state.ents) {
     if (e.k === "sp" && ovl(pr, { x: e.x + 2, y: e.y - 5, w: e.w - 4, h: 5 })) return die("OUCH. THAT WAS A SPIKE.");
@@ -427,7 +406,7 @@ function stepLevel() {
         showOverlay(LETTER);
       } else {
         state.ents = state.ents.filter(x => x !== e);
-        showOverlay({ title: "SKILL_ISSUE.TXT", lines: ["Nothing here.", "Keep going. :)"], photos: [], sign: "- THE GAME" });
+        showOverlay({ title: "SKILL_ISSUE.TXT", lines: ["ako naman ang mang-aasar sa 'yo ;P"], photos: [], sign: "- pikunin" });
       }
       return;
     }
@@ -442,7 +421,7 @@ function takePick(e) {
   state.ents = state.ents.filter(x => !(x.k === "pick" && x.key === e.key));
   if (e.key === "color") look.color = e.id === "Black" ? "#222222" : "#2f6bff";
   if (e.key === "clothes") look.pants = e.id.startsWith("Wide") ? "wide" : "jorts";
-  const msg = { cake: "YUM! +10 HP", snack: "SNACK ACQUIRED!", drink: "HYDRATED! +1 SPEED (NOT REALLY)", color: "SKIN UPDATED!", clothes: "NEW FIT EQUIPPED!" };
+  const msg = { cake: "YUM! +10 HP", snack: "SNACK ACQUIRED!", drink: "HYDRATED! +1 SPEED", color: "SKIN UPDATED!", clothes: "NEW FIT EQUIPPED!" };
   toast(msg[e.key] || "NICE!", "#7dff7d");
   state.flash = 8; beep(660, .15, "square", .05, 330);
   burst(e.x, e.y, 14, ["#ffe066", "#ffffff", "#7dff7d"]);
@@ -718,7 +697,6 @@ function render() {
   ctx.restore();
 }
 
-// fixed 60fps timestep
 let last = 0, acc = 0;
 function loop(t) {
   acc += Math.min(t - last, 100); last = t;
