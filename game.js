@@ -11,7 +11,8 @@ const LETTER = {
     "my wish for you this birthday is good health, big wins, all the things you dream of, and plenty of good food. i hope this year brings you as much joy and love as you bring to me. i can’t wait to see what adventures we’ll have together.",
 ],
   photos: ["photos1.jpeg", "photos2.jpg", "photos3.jpg"],
-  ps: "/n/n/n ps. i hope you like the game i made for you. i know it’s not perfect, but i made it with love and a lot of sweat (and tears).",
+  spacing: "                                                                                                                                                                                    ",
+  ps: " ps. i hope you like the game i made for you. i know it’s not perfect, but i made it with love and a lot of sweat (and tears).",
   sign: "- aefy baby",
 };
 
